@@ -1,0 +1,86 @@
+player_name = input("Введите имя вашего героя")
+
+player_hp = 100
+player_damage = 15
+gold = 50
+medkits = 1 
+
+monster_name = "Троль"
+monster_damage = 5
+monster_hp = 50
+
+rat_name = "Троль"
+rat_damage = 5
+ratr_hp = 10
+
+def heal_player(hp):
+   hp += 30
+   print(f"Вы восстановили {hp} здоровья")
+   return hp
+
+
+while True:
+    print("\n=== Карточка персонажа ===")
+    print(f"Имя: {player_name}")
+    print(f"Здоровье: {player_hp}")
+    print(f"Урон: {player_damage}")
+    print(f"Золото: {gold}")
+    print("==========================")
+
+    print("\nЧто хотите сделать сейчас?")
+    print("1. Сражаться")
+    print("2. Посмотреть карту")
+    print("3. Покупать")
+    print("4. Использовать аптечку")
+    print("5. Выйти из игры")   
+    choice = input("Ваш выбор(1 | 2 | 3 | 4 | 5): ").strip()
+
+    if choice == "1":
+        print(f"{player_name} Ты отправляешься в темный лес на посики сражений") 
+        print(f"{player_name} Ты встретил {monster_name} и начинаешь сражаться")
+        print(f"{player_name} Ты наносишь {player_damage} урона {monster_name} получает {player_damage} урона")
+        monster_hp -= player_damage
+        print(f"Ты ударил {monster_name} и нанес {player_damage}") 
+        print(f" У {monster_name} осталось здоровья:{monster_hp}")
+        print(f"У {player_name} осталось здоровья:{player_hp}")
+
+        if monster_hp <= 0:
+            print(f"{monster_name} умер")
+            print(f"{player_name} победил")
+            gold += 20
+            print(f"{player_name} ты получаешь 20 золота за победу над {monster_name}")
+
+    elif choice == "2":
+        print(f"{player_name} Смотришь на карту и видишь что на тебя готвоиться написать крыса ") 
+        print(f"{player_name} Ты встретил {rat_name} и начинаешь сражаться")
+        if ratr_hp <= 0:
+            print(f"{rat_name} умер")
+            print(f"{player_name} победил")
+            gold += 5
+            print(f"{player_name} ты получаешь 5 золота за победу над {rat_name}")
+        else:
+            print(f"{rat_name} убил тебя")
+            print(f"{player_name} проиграл")
+
+
+    elif choice == "3":
+        if gold >= 10:
+            gold -= 10
+            player_damage += 10
+            print(f"{player_name} ты идешь в магазин и покупаешь меч, который увеличивает твой урон на 10")
+            print(f"Теперь У ТЕБЯ УРОН: {player_damage}")
+            print(f"Eсть золото: {gold}")
+        else:
+            print(f"\n{player_name} у тебя недостаточно золота для покупки меча") 
+    elif choice == "4":
+        if medkits > 0:
+            player_hp = heal_player(player_hp)
+        else:
+            print(f"{player_name} у тебя нет аптечек")
+    elif choice == "5":
+        print(f"{player_name} ты решил выйти из игры")
+        break
+    else:
+        print(f" Неверный выбор, {player_name}. Пожалуйста, выбери 1, 2, 3 или 4.")
+
+
